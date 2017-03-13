@@ -15,6 +15,13 @@ from application.forms import EnterDBInfo, RetrieveDBInfo
 # Elastic Beanstalk initalization
 application = Flask(__name__)
 application.debug=True
+
+############################
+# Personal Data
+# mDict = {}
+# iPlayers = 0
+# isCow = 0
+
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'   
 
@@ -46,6 +53,68 @@ def index():
         return render_template('results.html', results=query_db, num_return=num_return)                
     
     return render_template('index.html', form1=form1, form2=form2)
+
+
+# ############################
+# # Initialize
+# @application.route("/getid", methods=["GET", "POST"])
+# def getid():
+#     global iPlayers
+#     iPlayers = iPlayers + 1
+#     return jsonify(
+#         id=iPlayers
+#     )
+
+# @application.route("/totalids", methods=["GET", "POST"])
+# def totalids():
+#     global iPlayers
+#     global isCow
+#     return jsonify(
+#         num=iPlayers,
+#         cow=isCow
+#     )
+
+# ############################
+# # Cow
+# @application.route("/createcow", methods=["GET", "POST"])
+# def createcow():
+#     global isCow
+#     if isCow == 0:
+#         isCow = 1
+#         return jsonify (
+#             cow=0
+#         )
+#     else:
+#         return jsonify (
+#             cow=1
+#         )
+
+# ############################
+# # GPS
+# @application.route("/api/<loc>", methods=["GET", "POST"])
+# def location(loc):
+#     temp = tuple(loc.split(","))
+#     mDict[int(temp[0])] = (float(temp[1]), float(temp[2]))
+#     mList = []
+#     for key in mDict:
+#         mDictTemp = {}
+#         mDictTemp["id"] = key
+#         mDictTemp["lat"] = (mDict[key][0])
+#         mDictTemp["lon"] = (mDict[key][1])
+#         mList.append(mDictTemp)
+
+#     return jsonify(mList)   
+
+# @application.route("/empty", methods=["GET", "POST"])
+# def empty():
+#     global iPlayers
+#     global isCow
+#     mDict.clear()
+#     iPlayers=0
+#     isCow=0
+#     return jsonify(
+#         dummy=0
+#     )
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
