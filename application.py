@@ -65,7 +65,7 @@ def getid():
         id=iPlayers
     )
 
-# @application.route("/totalids", methods=["GET", "POST"])
+@application.route("/totalids", methods=["GET", "POST"])
 def totalids():
     global iPlayers
     global isCow
