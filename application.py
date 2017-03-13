@@ -7,7 +7,7 @@ Author: Scott Rodkey - rodkeyscott@gmail.com
 Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
 '''
 
-from flask import Flask, jsonify, render_template, request, Response
+from flask import Flask, jsonify, json, render_template, request, Response
 from application import db
 from application.models import Data
 from application.forms import EnterDBInfo, RetrieveDBInfo
@@ -103,7 +103,7 @@ def location(loc):
         mDictTemp["lon"] = (mDict[key][1])
         mList.append(mDictTemp)
 
-    return jsonify(mList)   
+    return json.dumps(mList) #jsonify(mList)   
 
 @application.route("/empty", methods=["GET", "POST"])
 def empty():
